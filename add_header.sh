@@ -1,29 +1,28 @@
+#!/bin/bash
+
+FILENAME=$1
+USER=$(whoami)
+DATE=$(date +"%Y/%m/%d %H:%M:%S")
+
+if [ -z "$FILENAME" ]; then
+    echo "Usage: ./add_header.sh filename.c"
+    exit 1
+fi
+
+HEADER=$(cat <<EOF
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   $(printf "%-51s" "$(basename $FILENAME)"):+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                       +#+  +:+       +#+        */
+/*   By: $(printf "%-42s" "$LOGIN <$EMAIL>")+#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 15:20:21 by #+#    #+#             */
-/*   Updated: 2025/05/12 15:20:21 by ###   ########.fr       */
+/*   Created: $(printf "%-20s" "$DATE by $LOGIN")#+#    #+#             */
+/*   Updated: $(printf "%-20s" "$DATE by $LOGIN")###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+EOF
+)
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
+echo "$HEADER" | cat - "$FILENAME" > temp && mv temp "$FILENAME"
 
-	fd = open("test.txt", O_RDONLY);
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		printf("%s", line);
-		free(line);
-	}
-	return (0);
-}

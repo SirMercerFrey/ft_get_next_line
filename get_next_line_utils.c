@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By:  <>                                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 15:21:05 by #+#    #+#             */
+/*   Updated: 2025/05/12 15:21:05 by ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "get_next_line.h"
 
 int	found_endl(t_list *stash)
@@ -8,8 +19,8 @@ int	found_endl(t_list *stash)
 	if (!stash)
 		return (0);
 	current = ft_lst_get_last(stash);
-	if (!current || !current->content) 
-		return(0);
+	if (!current || !current->content)
+		return (0);
 	ptr = current->content;
 	while (*ptr)
 	{

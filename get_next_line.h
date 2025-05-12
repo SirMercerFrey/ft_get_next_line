@@ -1,21 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By:  <>                                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 15:08:34 by #+#    #+#             */
+/*   Updated: 2025/05/12 15:08:34 by ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
- #define GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include <stdio.h> //REMOVE FOR PUSH
-#include <stdlib.h>
-#include <fcntl.h> //REMOVE FOR PUSH
-#include <unistd.h>
+# include <stdio.h> //REMOVE FOR PUSH
+# include <stdlib.h>
+# include <fcntl.h> //REMOVE FOR PUSH
+# include <unistd.h>
 
-#ifndef BUFFER_SIZE
- #define BUFFER_SIZE 5
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
-
-typedef struct	s_list
+typedef struct s_list
 {
-	char	*content;
-	struct	s_list	*next;
-} t_list;
+	char			*content;
+	struct s_list	*next;
+}	t_list;
 
 char	*get_next_line(int fd);
 void	read_and_stash(int fd, t_list **stash);

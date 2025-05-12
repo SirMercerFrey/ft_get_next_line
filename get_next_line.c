@@ -1,5 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By:  <>                                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 15:15:49 by #+#    #+#             */
+/*   Updated: 2025/05/12 15:15:49 by ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "get_next_line.h"
 
+//Read from file descriptor and add to linked list
+//Extract from stash to line
+//Clean up stash
 char	*get_next_line(int fd)
 {
 	static t_list	*stash;
@@ -8,13 +22,10 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-//Read from file descriptor and add to linked list
 	read_and_stash(fd, &stash);
 	if (!stash)
 		return (NULL);
-//Extract from stash to line
 	extract_line(stash, &line);
-//Clean up stash
 	clean_stash(&stash);
 	if (!line || !*line)
 	{
@@ -78,8 +89,8 @@ void	add_to_stash(t_list **stash, char *buf, int lectum)
 	}
 	last = ft_lst_get_last(*stash);
 	last->next = new_node;
-} 
-		
+}
+
 //Extract stash to line until \n
 void	extract_line(t_list	*stash, char **line)
 {
@@ -121,7 +132,7 @@ void	clean_stash(t_list **stash)
 	int		len;
 
 	if (!stash)
-		return;
+		return ;
 	last = ft_lst_get_last(*stash);
 	i = 0;
 	while (last->content[i] && last->content[i] != '\n')
