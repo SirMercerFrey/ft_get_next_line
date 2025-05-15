@@ -50,9 +50,14 @@ void	read_and_stash(int fd, t_list **stash)
 		if (!buf)
 			return ;
 		lectum = (int)read(fd, buf, BUFFER_SIZE);
-		if ((!*stash && lectum == 0) || lectum == -1)
+		if (lectum <= 0)
 		{
 			free(buf);
+			if (lectum == -1)
+			{
+				free_stash(*stash);
+				*stash = NULL;
+			}
 			return ;
 		}
 		buf[lectum] = '\0';
